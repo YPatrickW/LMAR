@@ -1,2 +1,1 @@
-# LMAR-Pytorch
-Empowering Resampling Operation for Ultra-High-Definition Image Enhancement with Model-Aware Guidance
+# LMAR-Pytorch (Empowering Resampling Operation for Ultra-High-Definition Image Enhancement with Model-Aware Guidance-CVPR2024)
