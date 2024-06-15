@@ -101,6 +101,6 @@ def main(args, load_path):
 
 
 if __name__ == '__main__':
-    parser = read_args("/home/yuwei/code/cvpr/config/base_config.yaml")
+    parser = read_args("./config/base_config.yaml")
     args = parser.parse_args()
     main(args, "./pretrained_models/base_model.bin")
