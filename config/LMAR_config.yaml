@@ -1,0 +1,48 @@
+output_dir: '/home/yuwei/experiment/cvpr/LMAR_cubic'
+data:
+  train_dir: /home/data/yuwei/data/uhd4k_ll/train
+  test_dir: /home/data/yuwei/data/uhd4k_ll/test
+
+model:
+  in_channel: 3
+  model_channel: 8
+  sparsity_threshold: 0.01
+  num_blocks: 8
+  threslhold_frac: 0.6
+  hidden_channel: 48
+
+train_loader:
+  num_workers: 8
+  batch_size: 1
+  loader: crop
+  img_size: (1024, 1024)
+  shuffle: True
+  gt_size: (2160, 3840)
+  random_flag: True
+
+test_loader:
+  num_workers: 8
+  batch_size: 1
+  loader: default
+  img_size: ((1440, 2560), (1080, 1920), (1200, 1600), (720, 1280), (540, 960))
+  shuffle: False
+  gt_size: (2160, 3840)
+
+optimizer:
+  type: step
+  total_epoch: 12
+  lr: 0.0004
+  T_0: 0.00001
+  T_MULT: 1
+  ETA_MIN: 0.000001
+  step: 4
+  gamma: 0.75
+
+hyper_params:
+  lambda: 0.5
+
+resume:
+  flag: True
+  checkpoint: ./pretrained_models/base_model.bin
+
+evaluate_intervel: 1
