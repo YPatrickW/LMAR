@@ -228,7 +228,7 @@ def main(args):
 
     logging.info(args.__dict__)
 
-    model = codebook_model(args)
+    model = LMAR_model(args)
 
     discriminator = Discriminator(3).cuda()
 
