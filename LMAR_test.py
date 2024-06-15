@@ -31,7 +31,7 @@ ssim_calculator = pyiqa.create_metric('ssimc', downsample=True).cuda()
 
 
 def test(load_path, data_loader, args):
-    model = codebook_model(args)
+    model = LMAR_model(args)
     checkpoint = torch.load(load_path)
     model.load_state_dict(checkpoint["state_dict"])
     model.cuda()
