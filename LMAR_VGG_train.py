@@ -210,7 +210,7 @@ def main(args):
 
     logging.info(args.__dict__)
 
-    model = codebook_model(args)
+    model = LMAR_model(args)
 
     optimizer = optim.Adam(model.parameters(), lr=args.optimizer["lr"],
                            betas=(0.9, 0.999))
