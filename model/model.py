@@ -109,6 +109,7 @@ def subnet(net_structure, init='xavier'):
     return constructor
 
 
+
 class InvBlock(nn.Module):
     def __init__(self, channel_num, channel_split_num, subnet_constructor=subnet('HIN'),
                  clamp=0.8):  ################  split_channel一般设为channel_num的一半
@@ -176,7 +177,26 @@ class HinBlock(nn.Module):
         out = self.conv_2(out)
         out += self.identity(x)
         return out
+        
+class basic_block(nn.Module):
+    def __init__(self, channels_in, channels_out, block):
+        super(basic_block, self).__init__()
+        # ------------------------------------------
+        if block == "CONV":
+            self.body = nn.Sequential(nn.Conv2d(channels_in, channels_out, 3, 1, 1, bias=True),
+                                      nn.InstanceNorm2d(channels_out, affine=True), nn.ReLU(inplace=True), )
+        if block == "INV":
+            self.body = nn.Sequential(InvBlock(channels_in, channels_out // 2))
+        if block == "HIN":
+            self.body = nn.Sequential(HinBlock(channels_in, channels_out))
 
+        # self.use_frequency = use_frequency
+        # if self.use_frequency:
+        #     self.ff_branch = frequency_branch(channels_in, channels_out)
+        #     self.skip = skip(channels_out*2, channels_out, "CONV")
+
+    def forward(self, x):
+        return self.body(x)
 
 class net(nn.Module):
     def __init__(self, args):
